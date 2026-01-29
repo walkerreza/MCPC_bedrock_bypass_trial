@@ -1,5 +1,15 @@
 # MCPC Bedrock Bypass Tool
 
+![Preview](image_fce188dc.png)
+
+
+ini hanya untuk bedrok only, java ga bisa 
+
+
+
+
+java krek pake https://tlauncher.org/en/download_1/
+
 Tools CLI sederhana untuk melakukan bypass pada Minecraft Bedrock Edition (Windows 10/11) agar bisa membuka full version.
 
 ## ⚠️ Peringatan
@@ -32,6 +42,7 @@ Jika cara otomatis gagal, ikuti langkah ini:
 
 ### 2. Unlock Minecraft (Old Version)
 - **IObit Download**: Membantu download IObit Unlocker (Wajib untuk menghapus file sistem DLL).
+  > Link Download: [https://iobit-unlocker.softonic-id.com/](https://iobit-unlocker.softonic-id.com/)
 - **Bypass with System**: Mengganti file sistem (`Windows.ApplicationModel.Store.dll`) di System32 dan SysWOW64.
 
 ## 📦 Persyaratan
