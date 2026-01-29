@@ -45,8 +45,10 @@ Jika cara otomatis gagal, ikuti langkah ini:
   > Link Download: [https://iobit-unlocker.softonic-id.com/](https://iobit-unlocker.softonic-id.com/)
 - **Bypass with System**: Mengganti file sistem (`Windows.ApplicationModel.Store.dll`) di System32 dan SysWOW64.
 
-## Persyaratan
+## Persyaratan 
 - Windows 10/11
 - Python 3.x
 - Koneksi Internet (untuk download NSudo/Script)
 - Hak Akses Administrator
+
+kalo ada bug kasi tau gw
