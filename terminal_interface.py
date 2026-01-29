@@ -179,7 +179,7 @@ class TerminalInterface:
 ║                                                                   ║
 ║              MINECRAFT BEDROCK BYPASS TOOL v1.0                   ║
 ║                    [RUNNING AS ADMINISTRATOR]                     ║
-║                                                                   ║
+║                              BY WLKR                              ║
 ╚═══════════════════════════════════════════════════════════════════╝
         """
         self.clear_screen()
@@ -343,7 +343,65 @@ class TerminalInterface:
     
     def bypass_new_version(self):
         print(self.colorize("\n⏳ Running bypass for new version...", 'yellow'))
-        print(self.colorize("⚡ Feature akan diimplementasikan...", 'cyan'))
+        
+        while True:
+            drive = input(self.colorize("\n📂 Dimana letak XboxGames? (Masukan C atau D): ", 'cyan')).strip().upper()
+            if drive in ['C', 'D']:
+                break
+            print(self.colorize("❌ Harap masukan C atau D!", 'red'))
+        
+        print(self.colorize(f"\n🔍 Auto indexing di Disk {drive}...", 'yellow'))
+        
+        target_path = f"{drive}:\\XboxGames\\Minecraft for Windows\\Content"
+        
+        if os.path.exists(target_path):
+            print(self.colorize(f"✅ Index ditemukan: {target_path}", 'green'))
+            
+            # Define source folder using cwd
+            source_folder = os.path.join(self.cwd, "Minecraft FIX - NEW", "Minecraft FIX")
+            
+            files_to_copy = [
+                "dlllist.txt",
+                "OnlineFix.url",
+                "winmm.dll",
+                "OnlineFix.ini"
+            ]
+            
+            print(self.colorize("\n📦 Menyalin file bypass...", 'yellow'))
+            
+            if not os.path.exists(source_folder):
+                print(self.colorize(f"❌ Folder sumber tidak ditemukan: {source_folder}", 'red'))
+                print(self.colorize("Pastikan folder 'Minecraft FIX - NEW' ada di lokasi script ini.", 'white'))
+                return
+
+            all_success = True
+            for filename in files_to_copy:
+                src_file = os.path.join(source_folder, filename)
+                dst_file = os.path.join(target_path, filename)
+                
+                if os.path.exists(dst_file):
+                    print(self.colorize(f"⚠️  File sudah ada: {filename} (Skipped)", 'yellow'))
+                    continue
+
+                try:
+                    if os.path.exists(src_file):
+                        shutil.copy2(src_file, dst_file)
+                        print(self.colorize(f"✅ Copied: {filename}", 'green'))
+                    else:
+                        print(self.colorize(f"❌ Source file not found: {filename}", 'red'))
+                        all_success = False
+                except Exception as e:
+                    print(self.colorize(f"❌ Failed to copy {filename}: {e}", 'red'))
+                    all_success = False
+            
+            if all_success:
+                print(self.colorize("\n🎉 Selesai! Bypass berhasil dipasang.", 'green'))
+            else:
+                print(self.colorize("\n⚠️  Selesai dengan error. Beberapa file gagal disalin.", 'yellow'))
+                
+        else:
+            print(self.colorize("❌ Folder XboxGames\\Minecraft for Windows\\Content tidak ditemukan!", 'red'))
+            print(self.colorize(f"Checked: {target_path}", 'white'))
     
     def bypass_with_system(self):
         print(self.colorize("\n⏳ Running bypass with system...", 'yellow'))
