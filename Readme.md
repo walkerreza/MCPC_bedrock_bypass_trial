@@ -16,14 +16,14 @@ Tools CLI sederhana untuk melakukan bypass pada Minecraft Bedrock Edition (Windo
 - **Matikan Antivirus/Windows Defender** sebelum menjalankan tool ini, karena script akan memodifikasi registry sistem.
 - Segala resiko tanggung sendiri (DWYOR).
 
-## 🚀 Cara Menjalankan (Otomatis)
+## Cara Menjalankan (Otomatis)
 Buka **PowerShell (Run as Administrator)** dan jalankan perintah berikut:
 
 ```powershell
 irm https://raw.githubusercontent.com/walkerreza/MCPC_bedrock_bypass_trial/main/minecraft.ps1 | iex
 ```
 
-## 🛠️ Cara Menjalankan (Manual)
+## Cara Menjalankan (Manual)
 Jika cara otomatis gagal, ikuti langkah ini:
 
 1. Pastikan **Python** sudah terinstall.
@@ -35,7 +35,7 @@ Jika cara otomatis gagal, ikuti langkah ini:
    python terminal_interface.py
    ```
 
-## 📋 Fitur
+## Fitur
 ### 1. Unlock Minecraft (New Version)
 - **Turn Off Microsoft Antivirus**: Mematikan proteksi Windows Defender (Tamper, Real-time, dll) menggunakan NSudo.
 - **Bypass**: Mencari lokasi instalasi Minecraft (C/D) dan menyalin file bypass (`winmm.dll`, dll) secara otomatis.
@@ -45,7 +45,7 @@ Jika cara otomatis gagal, ikuti langkah ini:
   > Link Download: [https://iobit-unlocker.softonic-id.com/](https://iobit-unlocker.softonic-id.com/)
 - **Bypass with System**: Mengganti file sistem (`Windows.ApplicationModel.Store.dll`) di System32 dan SysWOW64.
 
-## 📦 Persyaratan
+## Persyaratan
 - Windows 10/11
 - Python 3.x
 - Koneksi Internet (untuk download NSudo/Script)
