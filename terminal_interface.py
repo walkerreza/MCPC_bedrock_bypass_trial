@@ -248,14 +248,53 @@ class TerminalInterface:
 ╔═══════════════════════════════════════════════════════════════════╗
 ║               UNLOCK MINECRAFT (OLD VERSION)                      ║
 ╠═══════════════════════════════════════════════════════════════════╣
+║  ⚠️  WARNING: WAJIB DOWNLOAD IOBIT UNLOCKER TERLEBIH DAHULU!       ║
+╠═══════════════════════════════════════════════════════════════════╣
 ║                                                                   ║
-║   [1] 🔧 Bypass with System                                       ║
+║   [1] � IObit Download (!)                                       ║
+║                                                                   ║
+║   [2] �🔧 Bypass with System                                       ║
 ║                                                                   ║
 ║   [0] ↩️  Back to Main Menu                                        ║
 ║                                                                   ║
 ╚═══════════════════════════════════════════════════════════════════╝
         """
         print(self.colorize(menu, 'magenta'))
+    
+    def iobit_workflow(self):
+        print(self.colorize("\n📥 Membuka halaman download IObit Unlocker...", 'yellow'))
+        url = "https://iobit-unlocker.softonic-id.com/"
+        os.system(f"start {url}")
+        print(self.colorize(f"Link: {url}", 'cyan'))
+        
+        print(self.colorize("\nLakukan instalasi IObit Unlocker sekarang.", 'white'))
+        input(self.colorize("Tekan Enter jika instalasi SUDAH SELESAI...", 'green'))
+        
+        print(self.colorize("\n🗑️  INSTRUKSI PENGHAPUSAN FILE SYSTEM", 'red'))
+        print(self.colorize("----------------------------------------", 'white'))
+        
+        sys32_target = os.path.join(os.environ['WINDIR'], 'System32', 'Windows.ApplicationModel.Store.dll')
+        syswow_target = os.path.join(os.environ['WINDIR'], 'SysWOW64', 'Windows.ApplicationModel.Store.dll')
+        
+        targets = [
+            ("System32", sys32_target),
+            ("SysWOW64", syswow_target)
+        ]
+        
+        for name, path in targets:
+            print(self.colorize(f"\n📁 Target {name}:", 'yellow'))
+            print(self.colorize(f"   {path}", 'cyan'))
+            
+            # Open explorer to the file if it exists
+            if os.path.exists(path):
+                subprocess.run(f'explorer /select,"{path}"')
+                print(self.colorize(f"   👉 Explorer dibuka. Klik kanan file ini > IObit Unlocker", 'white'))
+                print(self.colorize(f"   👉 Pilih opsi 'Unlock & Delete'", 'red'))
+                input(self.colorize("   Tekan Enter jika sudah dihapus...", 'green'))
+            else:
+                print(self.colorize("   ✅ File tidak ditemukan (Sudah dihapus/aman).", 'green'))
+        
+        print(self.colorize("\n✅ Semua file target sudah diproses. Silakan lanjut ke menu Bypass.", 'green'))
     
     def disable_realtime_protection(self):
         print(self.colorize("\n⏳ Disabling Real-time Protection...", 'yellow'))
@@ -510,9 +549,12 @@ class TerminalInterface:
             self.show_banner()
             self.show_old_version_menu()
             
-            choice = input(self.colorize("\n❯ Pilih menu [0-1]: ", 'cyan')).strip()
+            choice = input(self.colorize("\n❯ Pilih menu [0-2]: ", 'cyan')).strip()
             
             if choice == '1':
+                self.iobit_workflow()
+                input(self.colorize("\nTekan Enter untuk melanjutkan...", 'white'))
+            elif choice == '2':
                 self.bypass_with_system()
                 input(self.colorize("\nTekan Enter untuk melanjutkan...", 'white'))
             elif choice == '0':
