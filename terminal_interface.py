@@ -344,6 +344,11 @@ class TerminalInterface:
     def bypass_new_version(self):
         print(self.colorize("\n⏳ Running bypass for new version...", 'yellow'))
         
+        confirm = input(self.colorize("❓ Yakin ingin melanjutkan? (y/n): ", 'cyan')).strip().lower()
+        if confirm != 'y':
+            print(self.colorize("🚫 Operasi dibatalkan.", 'red'))
+            return
+        
         while True:
             drive = input(self.colorize("\n📂 Dimana letak XboxGames? (Masukan C atau D): ", 'cyan')).strip().upper()
             if drive in ['C', 'D']:
@@ -405,7 +410,45 @@ class TerminalInterface:
     
     def bypass_with_system(self):
         print(self.colorize("\n⏳ Running bypass with system...", 'yellow'))
-        print(self.colorize("🔧 Feature akan diimplementasikan...", 'cyan'))
+        
+        confirm = input(self.colorize("❓ Yakin ingin melanjutkan? (y/n): ", 'cyan')).strip().lower()
+        if confirm != 'y':
+            print(self.colorize("🚫 Operasi dibatalkan.", 'red'))
+            return
+        
+        system32_path = os.path.join(os.environ['WINDIR'], 'System32')
+        syswow64_path = os.path.join(os.environ['WINDIR'], 'SysWOW64')
+        
+        # Source paths
+        src_sys32 = os.path.join(self.cwd, "Minecraft - OLD", "System32", "Windows.ApplicationModel.Store.dll")
+        src_syswow = os.path.join(self.cwd, "Minecraft - OLD", "SysWOW64", "Windows.ApplicationModel.Store.dll")
+        
+        tasks = [
+            (src_sys32, os.path.join(system32_path, "Windows.ApplicationModel.Store.dll"), "System32"),
+            (src_syswow, os.path.join(syswow64_path, "Windows.ApplicationModel.Store.dll"), "SysWOW64")
+        ]
+        
+        print(self.colorize("\n📦 Menyalin file System DLL...", 'yellow'))
+        
+        for src, dst, label in tasks:
+            if os.path.exists(dst):
+                print(self.colorize(f"⚠️  File {label} sudah exist: {dst} (Aborted)", 'red'))
+                continue
+                
+            if not os.path.exists(src):
+                print(self.colorize(f"❌ Source file not found for {label}: {src}", 'red'))
+                continue
+            
+            try:
+                # Need trusted installer/high privs for system folders, try normal copy first
+                shutil.copy2(src, dst)
+                print(self.colorize(f"✅ Success copy to {label}", 'green'))
+            except PermissionError:
+                print(self.colorize(f"❌ Permission denied for {label}. Need NSudo/TrustedInstaller context.", 'red'))
+            except Exception as e:
+                print(self.colorize(f"❌ Failed copy to {label}: {e}", 'red'))
+        
+        print(self.colorize("\nℹ️  Operasi selesai.", 'cyan'))
     
     def handle_antivirus_menu(self):
         while True:
